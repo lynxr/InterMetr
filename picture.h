@@ -43,7 +43,7 @@ protected:
     QVector<QVector<QRgb> >  rgb; // Хранит RGB для последущего анализа
     QVector<QVector<QColor> >  color; // Хранит color для последущего анализа (Можно вызвать color.name)
 private:
-    const double PI = 3.141592;
+    double PI;
 signals:
 
 public slots:

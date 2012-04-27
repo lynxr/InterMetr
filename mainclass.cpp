@@ -6,6 +6,7 @@ mainClass::mainClass(QWidget *parent) :
     ui(new Ui::mainClass)
 {
     ui->setupUi(this);
+    razmer = 200;
     iSpaceCircle = 0;
     tmpSpaceCircle.clear();
     tmpSpaceCircle.resize(2);

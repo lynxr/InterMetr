@@ -22,7 +22,7 @@ protected:
     picture *image;
     int lineHeight; // для линии сюда записывается высота загруженной картинки
 private:
-    int razmer = 200; // размер линии для вспомоготельных координат
+    int razmer; // размер линии для вспомоготельных координат
     QVector < QAction*> act; // массив указателей для меню
     QVector < double > tmpSpaceCircle; // сюда записываем площадь окружносей для хранения
     int iSpaceCircle; // для счетчика tmpSpaceCircle

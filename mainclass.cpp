@@ -3,10 +3,9 @@
 
 mainClass::mainClass(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::mainClass)
+    ui(new Ui::mainClass), razmer(200)
 {
     ui->setupUi(this);
-    razmer = 200;
     iSpaceCircle = 0;
     tmpSpaceCircle.clear();
     tmpSpaceCircle.resize(2);

@@ -2,9 +2,8 @@
 #include <QFileDialog>
 
 picture::picture(QObject *parent) :
-    QObject(parent)
+    QObject(parent), PI(3.141592)
 {
-    PI = 3.141592;
     spaceCircle = 0;
     quadFlag = 0;
     imgLoaded = false;

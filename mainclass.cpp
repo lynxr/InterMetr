@@ -3,7 +3,7 @@
 
 mainClass::mainClass(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::mainClass), razmer(200)
+    ui(new Ui::mainClass), razmer(200), post(NULL)
 {
     ui->setupUi(this);
     iSpaceCircle = 0;
@@ -17,6 +17,7 @@ mainClass::mainClass(QWidget *parent) :
     image->labelW = ui->labelPic->width();
     QObject::connect(ui->pushLoad,SIGNAL(clicked()),this,SLOT(slotLoadImg()));
     QObject::connect(ui->pushSaveSpace,SIGNAL(clicked()),this,SLOT(slotGetSpace()));
+    QObject::connect(ui->pushOperations,SIGNAL(clicked()),this,SLOT(slotNewPostOperation()));
 }
 
 mainClass::~mainClass()
@@ -27,6 +28,7 @@ mainClass::~mainClass()
     }
     delete menu;
     delete image;
+    delete post;
     delete ui;
     qDebug() << "object mainClass deleted";
 }
@@ -52,8 +54,6 @@ void mainClass::slotGetSpace() {
     ui->labelMesages->setText(QString::fromUtf8("Выделено %1 квадратов").arg(iSpaceCircle + 1));
     image->pushToSaveSpace();
     tmpSpaceCircle[iSpaceCircle++] = image->spaceCircle;
-    qDebug() << tmpSpaceCircle[0] / tmpSpaceCircle[1];
-    ui->lineResult->setText(QString("%1").arg(tmpSpaceCircle[0] / tmpSpaceCircle[1]));
 
     // далее для того чтобы убрать все нарисованной с экрана
     for(int i = 0; i <= image->pointQuad.size() - 1; i++) {
@@ -66,6 +66,14 @@ void mainClass::slotGetSpace() {
     // конец
 
     if(iSpaceCircle >= 2) {
+        if(post == NULL) { // проверяем, выделена ли память под класс настроек, нафига еще раз выделять и херить указатель на предыдущий класс
+                post = new postOperations;  // Все квадраты выделены, выделяем память для класса настроек(Каламбурчик =) )
+        }
+        post->getParameters(tmpSpaceCircle[0] / tmpSpaceCircle[1], image->path);
+        ui->lineResult->setText(QString("%1").arg(tmpSpaceCircle[0] / tmpSpaceCircle[1]));
+        tmpSpaceCircle[0] = 0; //                       Обнуляем
+        tmpSpaceCircle[1] = 0; // переменные для того чтобы сохранить следующую площадь
+        //qDebug() << post->space << "POST SPACE";
         iSpaceCircle = 0;
         return;
     }
@@ -183,4 +191,13 @@ bool mainClass::menuCreate() {
    connect(act[1],SIGNAL(triggered()),SLOT(slotMenuMinus()));
    menu->addAction(act[1]);
    return true;
+}
+
+void mainClass::slotNewPostOperation() {
+    if(post == NULL) {  // зачем зря выделять память, если клиент не прибегнет к настройкам
+        QMessageBox::warning(this,"WARNING","Too early, please select lines");
+        return;
+    }
+    post->setWindowTitle("InterMetr v 1.0 Beta");
+    post->show();
 }

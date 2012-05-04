@@ -5,7 +5,9 @@
 #include <QMouseEvent>
 #include <QPainter>
 #include <QMenu>
+#include <QMessageBox>
 #include "picture.h"
+#include "postoperations.h"
 
 namespace Ui {
 class mainClass;
@@ -19,6 +21,7 @@ public:
     explicit mainClass(QWidget *parent = 0);
     virtual ~mainClass();
 protected:
+    postOperations *post; // класс настроек
     picture *image;
     int lineHeight; // для линии сюда записывается высота загруженной картинки
 private:
@@ -39,6 +42,7 @@ public slots:
     bool slotMenuPlus();
     bool slotMenuMinus();
     void slotGetSpace();
+    void slotNewPostOperation();
 };
 
 #endif // MAINCLASS_H

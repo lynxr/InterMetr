@@ -12,9 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainclass.cpp \
-    picture.cpp
+    picture.cpp \
+    postoperations.cpp
 
 HEADERS  += mainclass.h \
-    picture.h
+    picture.h \
+    postoperations.h
 
-FORMS    += mainclass.ui
+FORMS    += mainclass.ui \
+    postoperations.ui

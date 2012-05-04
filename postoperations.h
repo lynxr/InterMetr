@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QtGlobal>
 
 namespace Ui {
 class postOperations;

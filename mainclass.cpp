@@ -22,6 +22,7 @@ mainClass::mainClass(QWidget *parent) :
 
 mainClass::~mainClass()
 {
+    post->close();
     for(int i = 0; i <= act.size() - 1; i++) { // удаление указателей для меню, исходя из размера
         delete act[i];
         qDebug() << "action deleted";

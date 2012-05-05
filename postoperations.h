@@ -23,6 +23,7 @@ public:
 protected:
     double space;
     QString path;
+    QString pathToFile;
 
 private:
     Ui::postOperations *ui;

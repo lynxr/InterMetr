@@ -24,24 +24,35 @@ bool postOperations::getParameters(double lSpace, QString lPath) {
 }
 
 void postOperations::slotSaveToFile() {
+    if(ui->checkRememberFileName->isChecked() && !pathToFile.isEmpty()) {
+        QFile file(pathToFile);
+        file.open(QIODevice::Append | QIODevice::Text);
+        QTextStream out(&file);
+        out << strToSave();
+        file.close();
+        return;
+    }
     QFileDialog dialog;
         #ifdef Q_OS_LINUX
-    QString pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*)");
+    pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*)");
         #else
-    QString pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*.txt)");
+    pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*.txt)");
         #endif
     if(pathToFile.isEmpty()) {
         qDebug() << "EMPTY";
+        ui->checkRememberFileName->setEnabled(false);
         return;
-    }
+        }
     QFile file(pathToFile);
     file.open(QIODevice::Append | QIODevice::Text);
     QTextStream out(&file);
     out << strToSave();
     file.close();
+    ui->checkRememberFileName->setEnabled(true);
+    ui->checkRememberFileName->setChecked(true);
 }
 
 QString postOperations::strToSave() {
-    QString str = "###### "+path+" ######\n"+"SPACE = "+QString("%1").arg(space)+"\n";
+    QString str = "###### "+path+" ######\n"+QString("%1").arg(space)+"\n";
     return str;
 }

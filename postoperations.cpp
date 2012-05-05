@@ -25,15 +25,16 @@ bool postOperations::getParameters(double lSpace, QString lPath) {
 
 void postOperations::slotSaveToFile() {
     QFileDialog dialog;
+        #ifdef Q_OS_LINUX
+    QString pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*)");
+        #else
     QString pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*.txt)");
+        #endif
     if(pathToFile.isEmpty()) {
+        qDebug() << "EMPTY";
         return;
     }
-        #ifdef Q_OS_LINUX
-    QFile file(pathToFile+".txt");
-        #else
     QFile file(pathToFile);
-        #endif
     file.open(QIODevice::Append | QIODevice::Text);
     QTextStream out(&file);
     out << strToSave();

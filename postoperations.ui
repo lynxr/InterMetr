@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>432</width>
+    <width>434</width>
     <height>668</height>
    </rect>
   </property>
@@ -67,7 +67,7 @@
     <property name="geometry">
      <rect>
       <x>149</x>
-      <y>104</y>
+      <y>144</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -83,7 +83,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>150</y>
+      <y>190</y>
       <width>141</width>
       <height>20</height>
      </rect>
@@ -92,13 +92,38 @@
      <string>Remeber filename</string>
     </property>
    </widget>
+   <widget class="QLabel" name="labelTotalSpaces">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>90</y>
+      <width>371</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Количество подсчетов = 0</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>432</width>
+     <width>434</width>
      <height>22</height>
     </rect>
    </property>

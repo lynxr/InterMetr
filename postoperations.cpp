@@ -3,7 +3,7 @@
 
 postOperations::postOperations(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::postOperations)
+    ui(new Ui::postOperations), countSpaces(0)
 {
     ui->setupUi(this);
     qDebug() << "Post Operations created";
@@ -30,6 +30,7 @@ void postOperations::slotSaveToFile() {
         QTextStream out(&file);
         out << strToSave();
         file.close();
+        ui->labelTotalSpaces->setText(QString("Count spaces = %1").arg(++countSpaces));
         return;
     }
     QFileDialog dialog;
@@ -48,6 +49,7 @@ void postOperations::slotSaveToFile() {
     QTextStream out(&file);
     out << strToSave();
     file.close();
+    ui->labelTotalSpaces->setText(QString("Count spaces = %1").arg(++countSpaces));
     ui->checkRememberFileName->setEnabled(true);
     ui->checkRememberFileName->setChecked(true);
 }

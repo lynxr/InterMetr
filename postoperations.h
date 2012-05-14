@@ -19,6 +19,7 @@ public:
     explicit postOperations(QWidget *parent = 0);
     virtual ~postOperations();
     bool getParameters(double lSpace, QString lPath); // получаем параметры
+    int countSpaces; // Количество подсчетов
 
 protected:
     double space;

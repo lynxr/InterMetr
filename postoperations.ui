@@ -30,7 +30,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Площадь</string>
+     <string>Space</string>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -108,7 +108,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Количество подсчетов = 0</string>
+     <string>Results = 0</string>
     </property>
     <property name="scaledContents">
      <bool>false</bool>
@@ -149,7 +149,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Сататистическая ошибка</string>
+     <string>MISTAKE</string>
     </property>
     <property name="scaledContents">
      <bool>false</bool>

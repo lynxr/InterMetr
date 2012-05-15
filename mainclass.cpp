@@ -45,7 +45,7 @@ void mainClass::slotLoadImg() {
         else {
             lineHeight = image->img.height();
         }
-        ui->labelMesages->setText(QString::fromUtf8("Все считано, можно выделять"));
+        ui->labelMesages->setText(tr("All selected, now you can work"));
     }
 }
 
@@ -54,7 +54,7 @@ void mainClass::slotGetSpace() {
     if(!image->imgLoaded || image->quadFlag < 4) {
         return;
     }
-    ui->labelMesages->setText(QString::fromUtf8("Выделено %1 квадратов").arg(iSpaceCircle + 1));
+    ui->labelMesages->setText(tr("Selected %1 Quads").arg(iSpaceCircle + 1));
     image->pushToSaveSpace();
     tmpSpaceCircle[iSpaceCircle++] = image->spaceCircle;
 
@@ -87,7 +87,7 @@ void mainClass::keyPressEvent(QKeyEvent *event) {
 
     case Qt::Key_Escape:
         iSpaceCircle = 0;
-        ui->labelMesages->setText(QString::fromUtf8("Выделено %1 квадратов").arg(iSpaceCircle));
+        ui->labelMesages->setText(tr("Selected %1 quads").arg(iSpaceCircle));
 
         for(int i = 0; i <= tmpSpaceCircle.size() - 1; i++) {
             tmpSpaceCircle[i] = 0;
@@ -186,11 +186,11 @@ bool mainClass::slotMenuMinus() {
 }
 
 bool mainClass::menuCreate() {
-   act[0] = new QAction("(+) Plus",this);
+   act[0] = new QAction(tr("(+) Plus"),this);
    connect(act[0],SIGNAL(triggered()),SLOT(slotMenuPlus()));
    menu->addAction(act[0]);
 
-   act[1] = new QAction("(-) Minus",this);
+   act[1] = new QAction(tr("(-) Minus"),this);
    connect(act[1],SIGNAL(triggered()),SLOT(slotMenuMinus()));
    menu->addAction(act[1]);
    return true;
@@ -198,9 +198,20 @@ bool mainClass::menuCreate() {
 
 void mainClass::slotNewPostOperation() {
     if(post == NULL) {  // зачем зря выделять память, если клиент не прибегнет к настройкам
-        QMessageBox::warning(this,"WARNING","Too early, please select lines");
+        QMessageBox::warning(this,tr("WARNING"),tr("Too early, please select lines"));
         return;
     }
     post->setWindowTitle("InterMetr v 1.0 Beta");
     post->show();
+}
+
+void mainClass::translateProg() {
+    QTranslator *trans = new QTranslator;
+    QString fileTrans = "ru_RU.qm";
+    if(!trans->load(fileTrans)) {
+        delete trans;
+    }
+    else {
+    qApp->installTranslator(trans);
+    }
 }

@@ -23,3 +23,5 @@ HEADERS  += mainclass.h \
 
 FORMS    += mainclass.ui \
     postoperations.ui
+
+TRANSLATIONS = ru_RU.ts

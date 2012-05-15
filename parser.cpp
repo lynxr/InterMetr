@@ -35,7 +35,7 @@ double parser::statMistake() {
     sredArifmetic /= space.size();
     double Sx = sredKvOtkl(sredArifmetic,space);
     double mistake = Sx / sqrt(space.size() - 1);
-    qDebug() << QString("MISTAKE=%1").arg(mistake);
+    qDebug() << tr("MISTAKE=%1").arg(mistake);
     return mistake;
 }
 

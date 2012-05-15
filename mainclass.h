@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QMenu>
 #include <QMessageBox>
+#include <QTranslator>
 #include "picture.h"
 #include "postoperations.h"
 
@@ -20,6 +21,7 @@ class mainClass : public QMainWindow
 public:
     explicit mainClass(QWidget *parent = 0);
     virtual ~mainClass();
+    static void translateProg();
 protected:
     postOperations *post; // класс настроек
     picture *image;

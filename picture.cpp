@@ -35,7 +35,7 @@ bool picture::loadImage(QLabel *&label, QLabel *&status) {
     //QString n;
     int shirinaNew;
     int visotaNew;
-    n = dial.getOpenFileName(0,"Open Image","","JPEG FILES (*.jpg *.JPG *.Jpg *.jPg *.jpG)");
+    n = dial.getOpenFileName(0,tr("Open Image"),"","JPEG FILES (*.jpg *.JPG *.Jpg *.jPg *.jpG)");
     if(n.isEmpty())
     {
         label->setFixedHeight(labelH);
@@ -102,7 +102,7 @@ bool picture::saveColors(QLabel *&status) {
             //qDebug() << color[i][j].value();
             kolvo++;
         }
-        status->setText(QString("Saved %1 of %2 pixels\n").arg(kolvo).arg(razmer));
+        status->setText(tr("Saved %1 of %2 pixels\n").arg(kolvo).arg(razmer));
     }
     qDebug() << "image width" << width;
     qDebug() << "image height" << height;

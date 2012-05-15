@@ -35,14 +35,14 @@ void postOperations::slotSaveToFile() {
         QTextStream out(&file);
         out << strToSave();
         file.close();
-        ui->labelTotalSpaces->setText(QString("Count spaces = %1").arg(++countSpaces));
+        ui->labelTotalSpaces->setText(tr("Count spaces = %1").arg(++countSpaces));
         return;
     }
     QFileDialog dialog;
         #ifdef Q_OS_LINUX
-    pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*)");
+    pathToFile = dialog.getSaveFileName(0,tr("Select File"),"",tr("Text files (*)"));
         #else
-    pathToFile = dialog.getSaveFileName(0,"Select File","","Text files (*.txt)");
+    pathToFile = dialog.getSaveFileName(0,tr("Select File"),"",tr("Text files (*.txt)"));
         #endif
     if(pathToFile.isEmpty()) {
         qDebug() << "EMPTY";
@@ -54,7 +54,7 @@ void postOperations::slotSaveToFile() {
     QTextStream out(&file);
     out << strToSave();
     file.close();
-    ui->labelTotalSpaces->setText(QString("Count spaces = %1").arg(++countSpaces));
+    ui->labelTotalSpaces->setText(tr("Count spaces = %1").arg(++countSpaces));
     ui->checkRememberFileName->setEnabled(true);
     ui->checkRememberFileName->setChecked(true);
 }
@@ -68,9 +68,9 @@ QString postOperations::strToSave() {
 void postOperations::slotParseFromFile() {
         QFileDialog dial;
         #ifdef Q_OS_LINUX
-        QString file = dial.getOpenFileName(0,"Select File","","Text files (*)");
+        QString file = dial.getOpenFileName(0,tr("Select File"),"",tr("Text files (*)"));
         #else
-        QString file = dial.getOpenFileName(0,"Select File","","Text files (*.txt)");
+        QString file = dial.getOpenFileName(0,tr("Select File"),"",tr("Text files (*.txt)"));
         #endif
         if(!file.isEmpty()) {
             if(parseSpaces == NULL) {

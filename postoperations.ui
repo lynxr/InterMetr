@@ -124,13 +124,62 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>224</y>
+      <y>320</y>
       <width>131</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Statistic</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>220</y>
+      <width>371</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+      <underline>true</underline>
+     </font>
+    </property>
+    <property name="text">
+     <string>Сататистическая ошибка</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelMistake">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>260</y>
+      <width>371</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>15</pointsize>
+      <weight>75</weight>
+      <italic>true</italic>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

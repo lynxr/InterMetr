@@ -77,6 +77,6 @@ void postOperations::slotParseFromFile() {
             parseSpaces = new parser(file);
             }
             statMistake = parseSpaces->statMistake();
-
+            ui->labelMistake->setText(QString("%1").arg(statMistake));
         }
 }

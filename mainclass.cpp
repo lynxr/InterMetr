@@ -207,7 +207,7 @@ void mainClass::slotNewPostOperation() {
 
 void mainClass::translateProg() {
     QTranslator *trans = new QTranslator;
-    QString fileTrans = "ru_RU.qm";
+    QString fileTrans = QApplication::applicationDirPath() + "/ru_RU.qm";
     if(!trans->load(fileTrans)) {
         delete trans;
     }

@@ -15,6 +15,7 @@ public:
     virtual ~parser();
     QVector<double> parse();
     double statMistake(); // функция определения статистической ошибки
+    void switchFile(QString _file);
 
 protected:
     QString path;

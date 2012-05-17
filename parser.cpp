@@ -47,3 +47,7 @@ double parser::sredKvOtkl(double sredArifm, QVector< double > vector) {
     Sx = sqrt( sum / (vector.size() - 2) );
     return Sx;
 }
+
+void parser::switchFile(QString _file) {
+    path = _file;
+}

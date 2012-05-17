@@ -3,7 +3,7 @@
 
 postOperations::postOperations(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::postOperations), countSpaces(0), parseSpaces(NULL)
+    ui(new Ui::postOperations), countSpaces(0), parseSpaces(NULL), space(NULL)
 {
     ui->setupUi(this);
     qDebug() << "Post Operations created";
@@ -28,6 +28,10 @@ bool postOperations::getParameters(double lSpace, QString lPath) {
 }
 
 void postOperations::slotSaveToFile() {
+    if(space == NULL) {
+        ui->labelSpace->setText(QString("%1").arg(0));
+        return;
+    }
     if(ui->checkRememberFileName->isChecked() && !pathToFile.isEmpty()) {
 
         QFile file(pathToFile);
@@ -75,6 +79,9 @@ void postOperations::slotParseFromFile() {
         if(!file.isEmpty()) {
             if(parseSpaces == NULL) {
             parseSpaces = new parser(file);
+            }
+            else {
+                parseSpaces->switchFile(file);
             }
             statMistake = parseSpaces->statMistake();
             ui->labelMistake->setText(QString("%1").arg(statMistake));

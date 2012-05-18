@@ -1,6 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
-
+/*
+ * ПАРСИМ ДАННЫЕ ИЗ ФАЙЛА И СЧИТАЕМ РАЗЛИЧНУЮ СТАТИСТИКУ
+ */
 #include <QObject>
 #include <QDebug>
 #include <QVector>

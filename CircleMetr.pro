@@ -14,14 +14,17 @@ SOURCES += main.cpp\
         mainclass.cpp \
     picture.cpp \
     postoperations.cpp \
-    parser.cpp
+    parser.cpp \
+    graphics.cpp
 
 HEADERS  += mainclass.h \
     picture.h \
     postoperations.h \
-    parser.h
+    parser.h \
+    graphics.h
 
 FORMS    += mainclass.ui \
-    postoperations.ui
+    postoperations.ui \
+    graphics.ui
 
 TRANSLATIONS = ru_RU.ts

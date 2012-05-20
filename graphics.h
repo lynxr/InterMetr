@@ -15,6 +15,11 @@ class graphics : public QMainWindow
 public:
     explicit graphics(QWidget *parent = 0);
     virtual ~graphics();
+    bool saveFirstSpace(double _space);
+    bool saveSecondSpace(double _space);
+protected:
+    QVector< double > firstSpace; // хранит первую площадь
+    QVector< double > secondSpace; // хранит вторую площадь
     
 private:
     Ui::graphics *ui;

@@ -5,7 +5,7 @@ mainClass::mainClass(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::mainClass), razmer(200) /*post(NULL)*/
 {
-    post = new postOperations;
+    post = new postOperations(this);
     ui->setupUi(this);
     iSpaceCircle = 0;
     tmpSpaceCircle.clear();
@@ -70,9 +70,6 @@ void mainClass::slotGetSpace() {
     // конец
 
     if(iSpaceCircle >= 2) {
-//        if(post == NULL) { // проверяем, выделена ли память под класс настроек, нафига еще раз выделять и херить указатель на предыдущий класс
-//                post = new postOperations;  // Все квадраты выделены, выделяем память для класса настроек(Каламбурчик =) )
-//        }
         post->getParameters(tmpSpaceCircle[0] / tmpSpaceCircle[1], image->path);
         ui->lineResult->setText(QString("%1").arg(tmpSpaceCircle[0] / tmpSpaceCircle[1]));
         tmpSpaceCircle[0] = 0; //                       Обнуляем

@@ -5,6 +5,8 @@ parser::parser(QString lPath, QObject *parent) :
 {
     qDebug() << "Class PARSER created"+ path;
     spaces.clear();
+    firstSpaces.clear();
+    secondSpaces.clear();
 }
 
 parser::~parser() {
@@ -13,30 +15,33 @@ parser::~parser() {
 
 QVector< double > parser::parse() {
     spaces.clear();
+    firstSpaces.clear();
+    secondSpaces.clear();
+    QRegExp exprSALL("SALL (.?[0-9]+\.[0-9]+).?"); // для площади
+    QRegExp exprS1("S1 (.?[0-9]+\.[0-9]+).?"); // для первого квадрата
+    QRegExp exprS2("S2 (.?[0-9]+\.[0-9]+).?"); // для второго квадрата
     QFile file(path);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     for(int i=0; !file.atEnd(); i++) {
         QString tmpSpace = file.readLine();
-        if(i % 2 != 0)
+        bool SALL = exprSALL.exactMatch(tmpSpace);
+        bool S1 = exprS1.exactMatch(tmpSpace);
+        bool S2 = exprS2.exactMatch(tmpSpace);
+        if(SALL)
         {
-            spaces.push_back(tmpSpace.toDouble());
+            spaces.push_back(exprSALL.cap(1).toDouble());
+        }
+        if(S1)
+        {
+            firstSpaces.push_back(exprS1.cap(1).toDouble());
+        }
+        if(S2)
+        {
+            secondSpaces.push_back(exprS2.cap(1).toDouble());
         }
     }
     file.close();
     return spaces;
-}
-
-double parser::statMistake() {
-    double sredArifmetic = 0; //Среднее арифметическое
-    QVector < double > space = parse();
-    for(int i = 0; i < space.size() - 1; i++) {
-        sredArifmetic += space[i];
-    }
-    sredArifmetic /= space.size();
-    double Sx = sredKvOtkl(sredArifmetic,space);
-    double mistake = Sx / sqrt(space.size() - 1);
-    qDebug() << tr("MISTAKE=%1").arg(mistake);
-    return mistake;
 }
 
 double parser::sredKvOtkl(double sredArifm, QVector< double > vector) {
@@ -50,4 +55,25 @@ double parser::sredKvOtkl(double sredArifm, QVector< double > vector) {
 
 void parser::switchFile(QString _file) {
     path = _file;
+}
+
+double parser::statMistake() {
+    parse();
+    double sredArifmetic = 0; //Среднее арифметическое
+    for(int i = 0; i < spaces.size() - 1; i++) {
+        sredArifmetic += spaces[i];
+    }
+    sredArifmetic /= spaces.size();
+    double Sx = sredKvOtkl(sredArifmetic,spaces);
+    double mistake = Sx / sqrt(spaces.size() - 1);
+    qDebug() << tr("MISTAKE=%1").arg(mistake);
+    return mistake;
+}
+
+bool parser::createGraph(QVector< double > &_first, QVector< double > &_second, QVector<double> &_spaceAll) {
+    parse();
+    _first = firstSpaces;
+    _second = secondSpaces;
+    _spaceAll = spaces;
+    return true;
 }

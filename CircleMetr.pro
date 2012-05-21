@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = CircleMetr
 TEMPLATE = app
 
+LIBS += /usr/lib/libqwt.so
 
 SOURCES += main.cpp\
         mainclass.cpp \

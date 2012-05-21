@@ -3,6 +3,15 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include <QPainter>
+#include <algorithm>
+#include <math.h>
+#include <QVector>
+#include <qwt_plot.h>
+#include <qwt_plot_grid.h>
+#include <qwt_plot_curve.h>
+#include <qwt_legend.h>
+#include <qwt_plot_zoomer.h>
 
 namespace Ui {
 class graphics;
@@ -15,12 +24,13 @@ class graphics : public QMainWindow
 public:
     explicit graphics(QWidget *parent = 0);
     virtual ~graphics();
-    bool saveFirstSpace(double _space);
-    bool saveSecondSpace(double _space);
+    void createGraph(QVector< double > _first, QVector< double > _second, QVector< double > _spaceAll);
 protected:
-    QVector< double > firstSpace; // хранит первую площадь
-    QVector< double > secondSpace; // хранит вторую площадь
-    
+    QwtLegend *leg;
+    QwtPlotCurve *firstGraph, *secondGraph, *allGraph;
+    QwtPlotZoomer *zoom;
+    QVector < double > firstSpace, secondSpace, spaceAll;
+    bool maxWidthHeight(); // считаем максимальную длину и ширину
 private:
     Ui::graphics *ui;
 };

@@ -3,12 +3,13 @@
 
 postOperations::postOperations(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::postOperations), countSpaces(0), parseSpaces(NULL), space(NULL)
+    ui(new Ui::postOperations), countSpaces(0), parseSpaces(NULL), space(NULL), graph(NULL)
 {
     ui->setupUi(this);
     qDebug() << "Post Operations created";
     QObject::connect(ui->pushSaveToFile,SIGNAL(clicked()),this,SLOT(slotSaveToFile()));
-    QObject::connect(ui->pushStatistic,SIGNAL(clicked()),this,SLOT(slotParseFromFile()));
+    QObject::connect(ui->pushStatistic,SIGNAL(clicked()),this,SLOT(slotStatMistake()));
+    QObject::connect(ui->pushCreateGraph,SIGNAL(clicked()),this,SLOT(slotCreateGraph()));
 }
 
 postOperations::~postOperations()
@@ -17,11 +18,16 @@ postOperations::~postOperations()
     if(parseSpaces != NULL) {
         delete parseSpaces;
     }
+    if(graph != NULL) {
+        delete graph;
+    }
     qDebug() << "postOperations deleted";
 }
 
-bool postOperations::getParameters(double lSpace, QString lPath) {
-    space = lSpace;
+bool postOperations::getParameters(double _firstSpace, double _secondSpace, QString lPath) {
+    space = _firstSpace / _secondSpace;
+    firstSpace = _firstSpace;
+    secondSpace = _secondSpace;
     path = lPath;
     ui->labelSpace->setText(QString("%1").arg(space));
     return true;
@@ -64,12 +70,12 @@ void postOperations::slotSaveToFile() {
 }
 
 QString postOperations::strToSave() {
-    QString str = "###### "+path+" ######\n"+QString("%1").arg(space)+"\n";
+    QString str = "###### "+path+" ######\n"+QString("SALL %1").arg(space)+"\n"+QString("S1 %1").arg(firstSpace)+"\n"+QString("S2 %2").arg(secondSpace)+"\n";
     return str;
 }
 
 
-void postOperations::slotParseFromFile() {
+void postOperations::slotStatMistake() {
         QFileDialog dial;
         #ifdef Q_OS_LINUX
         QString file = dial.getOpenFileName(0,tr("Select File"),"",tr("Text files (*)"));
@@ -86,4 +92,34 @@ void postOperations::slotParseFromFile() {
             statMistake = parseSpaces->statMistake();
             ui->labelMistake->setText(QString("%1").arg(statMistake));
         }
+}
+
+void postOperations::slotCreateGraph() {
+    QFileDialog dial;
+    #ifdef Q_OS_LINUX
+    QString file = dial.getOpenFileName(0,tr("Select File"),"",tr("Text files (*)"));
+    #else
+    QString file = dial.getOpenFileName(0,tr("Select File"),"",tr("Text files (*.txt)"));
+    #endif
+    if(!file.isEmpty()) {
+        if(parseSpaces == NULL) {
+        parseSpaces = new parser(file);
+        }
+        else {
+            parseSpaces->switchFile(file);
+        }
+        // СЮДА ФУНКЦИЮ ПО ПОСТРОЕНИЮ ГРАФИКА
+        if(graph == NULL) {
+            graph = new graphics(this);
+            graph->show();
+        }
+        else {
+            graph->show();
+        }
+        QVector<double> tmpFirstSpace, tmpSecondSpace, tmpAllSpace;
+        if(parseSpaces->createGraph(tmpFirstSpace,tmpSecondSpace,tmpAllSpace))
+        {
+            graph->createGraph(tmpFirstSpace,tmpSecondSpace,tmpAllSpace);
+        }
+    }
 }

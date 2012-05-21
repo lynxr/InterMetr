@@ -5,25 +5,73 @@ graphics::graphics(QWidget *parent) :
     QMainWindow(parent), ui(new Ui::graphics)
 {
     ui->setupUi(this);
+    setWindowTitle("InterMetr 1.0 RC1");
     qDebug() << "CLASS GRAPHICS CREATED";
     firstSpace.clear();
     secondSpace.clear();
+    spaceAll.clear();
+    ui->qwtPlot->setTitle(tr("dependence"));
+    leg = new QwtLegend;
+    leg->setItemMode(QwtLegend::ReadOnlyItem);
+    ui->qwtPlot->insertLegend(leg,QwtPlot::TopLegend);
 }
 
 graphics::~graphics()
 {
     delete ui;
+    delete leg;
+    delete firstGraph;
+    delete secondGraph;
+    delete allGraph;
+    delete zoom;
     qDebug() << "CLASS GRAPHICS DELETED";
 }
 
-bool graphics::saveFirstSpace(double _space) {
-    firstSpace.push_back(_space);
-    qDebug() << QString("FIRST=%1").arg(_space);
-    return true;
+void graphics::createGraph(QVector<double> _first, QVector<double> _second, QVector<double> _spaceAll) {
+    firstSpace = _first;
+    secondSpace = _second;
+    spaceAll = _spaceAll;
+    maxWidthHeight();
+    QVector<double> dataSize;
+    for( int i = 0; i <= firstSpace.size(); i++) {
+        dataSize.push_back(i);
+    }
+
+    zoom = new QwtPlotZoomer(ui->qwtPlot->canvas());
+    zoom->setRubberBandPen(QPen(Qt::white));
+
+    firstGraph = new QwtPlotCurve(tr("First Graph"));
+    firstGraph->setPen(QPen(Qt::red));
+    firstGraph->setRenderHint(QwtPlotItem::RenderAntialiased);
+
+    secondGraph = new QwtPlotCurve(tr("Second Graph"));
+    secondGraph->setPen(QPen(Qt::blue));
+    secondGraph->setRenderHint(QwtPlotItem::RenderAntialiased);
+
+    allGraph = new QwtPlotCurve(tr("All Graph"));
+    allGraph->setPen(QPen(Qt::yellow));
+    allGraph->setRenderHint(QwtPlotItem::RenderAntialiased);
+
+    for(int i = 0; i <= firstSpace.size() - 1; i++) {
+        firstGraph->setData(dataSize,firstSpace);
+        secondGraph->setData(dataSize,secondSpace);
+        allGraph->setData(dataSize,spaceAll);
+    }
+    firstGraph->attach(ui->qwtPlot);
+    secondGraph->attach(ui->qwtPlot);
+    allGraph->attach(ui->qwtPlot);
+    ui->qwtPlot->replot();
 }
 
-bool graphics::saveSecondSpace(double _space) {
-    secondSpace.push_back(_space);
-    qDebug() << QString("SECOND=%1").arg(_space);
-    return true;
+bool graphics::maxWidthHeight() {
+    QVector< double > allMas;
+    allMas.clear();
+    allMas = firstSpace + secondSpace + spaceAll;
+    double max = *std::max_element(allMas.begin(),allMas.end());
+    double min = *std::min_element(allMas.begin(),allMas.end());
+    ui->qwtPlot->setAxisTitle(QwtPlot::yLeft,tr("size Space"));
+    ui->qwtPlot->setAxisScale(QwtPlot::yLeft,min,max);
+    ui->qwtPlot->setAxisTitle(QwtPlot::xBottom,tr("number"));
+    ui->qwtPlot->setAxisScale(QwtPlot::xBottom,0,firstSpace.size() - 1);
+    qDebug() << allMas;
 }

@@ -70,7 +70,7 @@ void mainClass::slotGetSpace() {
     // конец
 
     if(iSpaceCircle >= 2) {
-        post->getParameters(tmpSpaceCircle[0] / tmpSpaceCircle[1], image->path);
+        post->getParameters(tmpSpaceCircle[0], tmpSpaceCircle[1],image->path);
         ui->lineResult->setText(QString("%1").arg(tmpSpaceCircle[0] / tmpSpaceCircle[1]));
         tmpSpaceCircle[0] = 0; //                       Обнуляем
         tmpSpaceCircle[1] = 0; // переменные для того чтобы сохранить следующую площадь
@@ -199,7 +199,7 @@ void mainClass::slotNewPostOperation() {
         QMessageBox::warning(this,tr("WARNING"),tr("Too early, please select lines"));
         return;
     }
-    post->setWindowTitle("InterMetr v 1.0 Beta");
+    post->setWindowTitle("InterMetr v 1.0 RC1");
     post->show();
 }
 

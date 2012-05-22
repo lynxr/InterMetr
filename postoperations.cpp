@@ -114,6 +114,8 @@ void postOperations::slotCreateGraph() {
             graph->show();
         }
         else {
+            delete graph;
+            graph = new graphics(this);
             graph->show();
         }
         QVector<double> tmpFirstSpace, tmpSecondSpace, tmpAllSpace;

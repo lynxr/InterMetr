@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <math.h>
 #include <QVector>
+#include <QDir>
 #include <qwt_plot.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_curve.h>
@@ -33,6 +34,9 @@ protected:
     bool maxWidthHeight(); // считаем максимальную длину и ширину
 private:
     Ui::graphics *ui;
+    bool graphCreated;
+public slots:
+    bool slotSaveAsImage();
 };
 
 #endif // GRAPHICS_H

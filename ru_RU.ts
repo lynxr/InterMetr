@@ -9,34 +9,55 @@
         <translation></translation>
     </message>
     <message>
+        <location filename="graphics.ui" line="47"/>
+        <source>Save as image</source>
+        <translation>Сохранить картинку</translation>
+    </message>
+    <message>
+        <location filename="graphics.ui" line="60"/>
+        <source>Save 1</source>
+        <translation>Сохранить 1</translation>
+    </message>
+    <message>
+        <location filename="graphics.ui" line="76"/>
+        <source>Save 2</source>
+        <translation>Сохранить 2</translation>
+    </message>
+    <message>
         <location filename="graphics.cpp" line="13"/>
         <source>dependence</source>
         <translation>Зависимость X(количество) от Y(размер)</translation>
     </message>
     <message>
-        <location filename="graphics.cpp" line="43"/>
+        <location filename="graphics.cpp" line="44"/>
         <source>First Graph</source>
         <translation>Первые замеры</translation>
     </message>
     <message>
-        <location filename="graphics.cpp" line="47"/>
+        <location filename="graphics.cpp" line="48"/>
         <source>Second Graph</source>
         <translation>Вторые замеры</translation>
     </message>
     <message>
-        <location filename="graphics.cpp" line="51"/>
+        <location filename="graphics.cpp" line="52"/>
         <source>All Graph</source>
         <translation>Коэфициент</translation>
     </message>
     <message>
-        <location filename="graphics.cpp" line="72"/>
+        <location filename="graphics.cpp" line="77"/>
         <source>size Space</source>
         <translation>Размер</translation>
     </message>
     <message>
-        <location filename="graphics.cpp" line="74"/>
+        <location filename="graphics.cpp" line="79"/>
+        <location filename="graphics.cpp" line="84"/>
         <source>number</source>
         <translation>Число измерений</translation>
+    </message>
+    <message>
+        <location filename="graphics.cpp" line="82"/>
+        <source>Size Space</source>
+        <translation>Размер</translation>
     </message>
 </context>
 <context>

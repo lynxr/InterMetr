@@ -8,6 +8,7 @@
 #include <math.h>
 #include <QVector>
 #include <QDir>
+#include <QFileDialog>
 #include <qwt_plot.h>
 #include <qwt_plot_grid.h>
 #include <qwt_plot_curve.h>
@@ -31,6 +32,7 @@ protected:
     QwtPlotCurve *firstGraph, *secondGraph, *allGraph;
     QwtPlotZoomer *zoom;
     QVector < double > firstSpace, secondSpace, spaceAll;
+    bool saveImage(QwtPlot *saveWidget);
     bool maxWidthHeight(); // считаем максимальную длину и ширину
 private:
     Ui::graphics *ui;

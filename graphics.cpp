@@ -88,7 +88,30 @@ bool graphics::maxWidthHeight() {
     qDebug() << allMas;
 }
 
+bool graphics::saveImage(QwtPlot *saveWidget) {
+    QPixmap picSave(saveWidget->width(),saveWidget->height());
+    picSave.fill(Qt::white);
+    saveWidget->print(picSave);
+    QFileDialog dial(this);
+    QString picPath = dial.getSaveFileName(this,tr("SAVE IMAGE"),"","JPEG FILES (*.jpg)");
+    if(picPath.isEmpty()) {
+        return false;
+    }
+    if(picSave.save(picPath,"jpg"))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 bool graphics::slotSaveAsImage() {
-
+    if(ui->checkSaveOne->isChecked()) {
+        saveImage(ui->qwtPlot);
+    }
+    if(ui->checkSaveTwo->isChecked()) {
+        saveImage(ui->qwtPlotAll);
+    }
 }
